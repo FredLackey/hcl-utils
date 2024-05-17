@@ -1,0 +1,20 @@
+{
+  "name": "hcl-utils",
+  "version": "0.0.0",
+  "description": "Helper utilities for working with HCL (Terraform) files.",
+  "type": "module",
+  "main": "src/index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Fred Lackey",
+    "email": "fred.lackey@gmail.com",
+    "url": "http://fredlackey.com"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cleaner-node": "^1.0.31"
+  }
+}

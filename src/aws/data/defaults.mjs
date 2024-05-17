@@ -1,0 +1,1 @@
+export const UID_TAG_NAME = 'uid';
