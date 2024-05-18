@@ -1,14 +1,22 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 import { UID_TAG_NAME } from './data/defaults.mjs';
 import parseFile from './utils/parse-file.mjs';
 import addUidTagsToData from './utils/add-uid-tags-to-data.mjs';
 import getNewLines from './utils/get-new-lines.mjs';
+import setUids from './utils/set-uids.mjs';
 
-const addUidTags = async (filePath, uidTag = UID_TAG_NAME) => {
+const addAll = async (filePath, uidTag = UID_TAG_NAME) => {
 
   const data = await parseFile(filePath, uidTag);
 
   addUidTagsToData(data, uidTag);
+  setUids(data, uidTag);
+
+
+
+
+
+
 
   const backupName = `${filePath}.${_.getBlockDate()}.bak`;
   if (!_.copyFile(filePath, backupName)) {
@@ -23,4 +31,4 @@ const addUidTags = async (filePath, uidTag = UID_TAG_NAME) => {
 
 };
 
-export default addUidTags;
+export default addAll;

@@ -1,3 +1,5 @@
+import _ from 'cleaner-node';
+
 const isBaseResource = node => {
 
   let name = node.name || '';

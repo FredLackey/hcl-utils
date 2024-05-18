@@ -1,4 +1,4 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 import isTaggable from '../helpers/is-taggable.mjs';
 import isMissingTags from '../helpers/is-missing-tags.mjs';
 import hasUidTag from '../helpers/has-uid-tag.mjs';
@@ -64,7 +64,7 @@ const parseFile = async (filePath, tagName = UID_TAG_NAME) => {
     if (line.endsWith('{')) {
 
       const parts = _.removeSuffix(line, '{').split(' ').filter(x => (_.isValidString(x) && x.trim() !== '=')).map(x => deQuote(x));
-      const name  = getNodeName(stack, parts);
+      const name  = getNodeName(stack, [...parts]);
 
       node = {
         
@@ -72,7 +72,7 @@ const parseFile = async (filePath, tagName = UID_TAG_NAME) => {
         parts,
 
         name,
-        nameHash: _.hashString(name).toUpperCase(),
+        nameHash: _.hashString(name),
 
         lines   : [rawLine],
         lineHash: null,

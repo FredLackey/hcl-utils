@@ -1,4 +1,4 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 
 const getParent = (stack, node) => {
   if (stack.length === 0) {
@@ -16,18 +16,32 @@ const getParent = (stack, node) => {
     : lastItem;
 }
 
-const getNodeName = (stack, node) => {
+const getNodeName = (stack, nodeOrNameParts) => {
 
-  const parent     = getParent(stack, node);
+  const isNode = _.isObject(nodeOrNameParts);
+
+  const parent = isNode 
+    ? getParent(stack, nodeOrNameParts) 
+    : (stack.length > 0)
+      ? stack[stack.length - 1]
+      : null;
+
   const parentName = parent?.name || '';
 
-  let   parts     = [...node.parts];
-  const name      = parts.shift();
-  const qualifier = parts.join('.');
+  let parts = isNode ? nodeOrNameParts.parts : nodeOrNameParts;
 
+  let name = parts.shift();
+
+  const qualifier = parts.join('.');
+  
   const itemName = qualifier ? `${name}(${qualifier})` : name;
   
   return [parentName, itemName].filter(x => _.isValidString(x)).join('.');
+
+
+
+
+
 }
 
 export default getNodeName;

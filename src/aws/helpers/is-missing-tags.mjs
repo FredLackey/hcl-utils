@@ -1,5 +1,5 @@
-import isTaggable from '../helpers/is-taggable.mjs';
-import hasTags from '../helpers/has-tags.mjs';
+import isTaggable from './is-taggable.mjs';
+import hasTags from './has-tags.mjs';
 
 const isMissingTags = node => {
   return isTaggable(node) && !hasTags(node);

@@ -1,12 +1,12 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 
-const NODE_SUFFIX = 'ARN';
+const NODE_SUFFIX = 'hash';
 
-const addArnOutputs = async (data) => {
+const addHashOutputs = (data) => {
 
   data.nodes.filter(x => (x && x.nameHash && x.lineHash && x.parts[0] === 'resource')).forEach(resNode => {
 
-    const outputNodeName = `${resNode.nameHash}_${NODE_SUFFIX}`.toUpperCase();
+    const outputNodeName = `${resNode.nameHash}_${NODE_SUFFIX}`;
     let   outputNode     = data.nodes.find(x => x && x.name === outputNodeName);
     
     if (outputNode?.value) {
@@ -15,14 +15,14 @@ const addArnOutputs = async (data) => {
 
     const lines = [
       `output "${outputNodeName}" {`,
-      `  value = ${resNode.parts.join('.')}.arn`,
+      `  value = "${resNode.lineHash}"`,
       `}`
     ];
     const name = `output(${outputNodeName})`;
 
-    arnNode = {
+    outputNode = {
       index: data.nodes.length,
-      parts: ['output', hashNodeName],
+      parts: ['output', outputNodeName],
       name,
       nameHash: _.hashString(name),
       lines,
@@ -31,10 +31,10 @@ const addArnOutputs = async (data) => {
       tagsAll: [],
     };
 
-    data.nodes.push(arnNode);
+    data.nodes.push(outputNode);
 
   });
 
 };
 
-export default addArnOutputs;
+export default addHashOutputs;

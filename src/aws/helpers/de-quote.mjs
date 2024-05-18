@@ -1,4 +1,4 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 
 const deQuote = value => {
   if (_.isValidString(value) && value.startsWith('"') && value.endsWith('"') && value.length >= 3) {

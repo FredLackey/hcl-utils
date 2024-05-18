@@ -1,0 +1,7 @@
+strict digraph G {
+	"aws_iam_user.flackey_admin" [ height=1.15, image="/root/.cache/inframap/assets/aws/Security_Identity_and_Compliance/AWS-Identity-and-Access-Management_IAM.png", imagepos=tc, labelloc=b, shape=plaintext ];
+	"aws_iam_user.tf_user" [ height=1.15, image="/root/.cache/inframap/assets/aws/Security_Identity_and_Compliance/AWS-Identity-and-Access-Management_IAM.png", imagepos=tc, labelloc=b, shape=plaintext ];
+	"aws_internet_gateway.igw_09a9ebbab5713c545" [ height=1.15, image="/root/.cache/inframap/assets/aws/Networking_and_Content_Delivery/Amazon-VPC_Internet-Gateway_light-bg.png", imagepos=tc, labelloc=b, shape=plaintext ];
+	"aws_security_group.sg_0afe7c1446fcc470a" [ shape=rectangle ];
+
+}

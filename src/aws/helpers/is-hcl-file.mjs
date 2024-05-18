@@ -1,4 +1,4 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 
 const isHclFile = (filePath) => {
 

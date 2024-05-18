@@ -1,9 +1,9 @@
-import * as _ from 'cleaner-node';
+import _ from 'cleaner-node';
 import { UID_TAG_NAME } from './data/defaults.mjs';
 import parseFile from './utils/parse-file.mjs';
 import getNewLines from './utils/get-new-lines.mjs';
 
-const addArnOutputs = async (filePath, uidTag = UID_TAG_NAME) => {
+const addHashOutputs = async (filePath, uidTag = UID_TAG_NAME) => {
 
   const data = await parseFile(filePath, uidTag);
 
@@ -11,22 +11,22 @@ const addArnOutputs = async (filePath, uidTag = UID_TAG_NAME) => {
   for (let i = 0; i < resNodes.length; i++) {
 
     const resNode = resNodes[i];
-    const arnNodeName = `${resNode.nameHash}_ARN`.toUpperCase();
+    const hashNodeName = `${resNode.nameHash}_hash`;
     
-    let arnNode = data.nodes.find(x => x && x.name === arnNodeName);
+    let arnNode = data.nodes.find(x => x && x.name === hashNodeName);
     if (arnNode?.value) {
       continue;
     };
   
     const lines = [
-      `output "${arnNodeName}" {`,
+      `output "${hashNodeName}" {`,
       `  value = ${resNode.parts.join('.')}.arn`,
       `}`                                                                                                
     ];
-    const name = `output(${arnNodeName})`;
+    const name = `output(${hashNodeName})`;
     arnNode = {
       index: data.nodes.length,
-      parts: ['output', arnNodeName],
+      parts: ['output', hashNodeName],
       name,
       nameHash: _.hashString(name),
       lines,
@@ -55,4 +55,4 @@ const addArnOutputs = async (filePath, uidTag = UID_TAG_NAME) => {
 
 };
 
-export default addArnOutputs;
+export default addHashOutputs;

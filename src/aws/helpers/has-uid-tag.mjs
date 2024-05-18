@@ -1,5 +1,5 @@
-import * as _ from 'cleaner-node';
-import hasTags from "../helpers/has-tags.mjs";
+import _ from 'cleaner-node';
+import hasTags from "./has-tags.mjs";
 
 const hasUidTag = (node, tagName) => {
   if (!hasTags(node)) {

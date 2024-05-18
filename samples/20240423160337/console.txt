@@ -1,0 +1,20 @@
+Starting Terracognita with version v0.8.4
+Importing with filters: 
+	Tags:    [],
+	Include: [],
+	Exclude: [],
+	Targets: [],
+Importing aws_iam_access_key [1/1]Importing aws_iam_access_key [1/1] Done!
+Importing aws_iam_account_password_policy [1/1]Importing aws_iam_account_password_policy [1/1] Done!
+Importing aws_iam_role [1/2]Importing aws_iam_role [2/2]Importing aws_iam_role [2/2] Done!
+Importing aws_iam_role_policy_attachment [1/2]Importing aws_iam_role_policy_attachment [2/2]Importing aws_iam_role_policy_attachment [2/2] Done!
+Importing aws_iam_user [1/2]Importing aws_iam_user [2/2]Importing aws_iam_user [2/2] Done!
+Importing aws_iam_user_policy_attachment [1/3]Importing aws_iam_user_policy_attachment [2/3]Importing aws_iam_user_policy_attachment [3/3]Importing aws_iam_user_policy_attachment [3/3] Done!
+Importing aws_internet_gateway [1/1]Importing aws_internet_gateway [1/1] Done!
+Importing aws_route53_resolver_rule_association [1/1]Importing aws_route53_resolver_rule_association [1/1] Done!
+Importing aws_route_table [1/1]Importing aws_route_table [1/1] Done!
+Importing aws_security_group [1/1]Importing aws_security_group [1/1] Done!
+Importing aws_subnet [1/6]Importing aws_subnet [2/6]Importing aws_subnet [3/6]Importing aws_subnet [4/6]Importing aws_subnet [5/6]Importing aws_subnet [6/6]Importing aws_subnet [6/6] Done!
+Importing aws_vpc [1/1]Importing aws_vpc [1/1] Done!
+Writing HCL ...Writing HCL Done!
+Writing TFState ...Writing TFState Done!
