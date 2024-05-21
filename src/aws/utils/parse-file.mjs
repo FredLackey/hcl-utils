@@ -1,10 +1,9 @@
 import _ from 'cleaner-node';
 import isTaggable from '../helpers/is-taggable.mjs';
 import isMissingTags from '../helpers/is-missing-tags.mjs';
-import hasUidTag from '../helpers/has-uid-tag.mjs';
+import hasTag from '../helpers/has-uid-tag.mjs';
 import isMissingUidTag from '../helpers/is-missing-uid-tag.mjs';
 import isHclFile from '../helpers/is-hcl-file.mjs';
-import deQuote from '../helpers/de-quote.mjs';
 import getNodeName from '../helpers/get-node-name.mjs';
 import { UID_TAG_NAME } from '../data/defaults.mjs';
 
@@ -63,7 +62,7 @@ const parseFile = async (filePath, tagName = UID_TAG_NAME) => {
  
     if (line.endsWith('{')) {
 
-      const parts = _.removeSuffix(line, '{').split(' ').filter(x => (_.isValidString(x) && x.trim() !== '=')).map(x => deQuote(x));
+      const parts = _.removeSuffix(line, '{').split(' ').filter(x => (_.isValidString(x) && x.trim() !== '=')).map(x => _.unquote(x));
       const name  = getNodeName(stack, [...parts]);
 
       node = {
@@ -130,7 +129,7 @@ const parseFile = async (filePath, tagName = UID_TAG_NAME) => {
     lines,
     taggable     : nodes.filter(x => isTaggable(x)),
     missingTags  : nodes.filter(x => isMissingTags(x)),
-    hasUidTag    : nodes.filter(x => hasUidTag(x, tagName)),
+    hasUidTag    : nodes.filter(x => hasTag(x, tagName)),
     missingUidTag: nodes.filter(x => isMissingUidTag(x, tagName)),
     outputs      : nodes.filter(x => x.parts[0] === 'output'),
   }

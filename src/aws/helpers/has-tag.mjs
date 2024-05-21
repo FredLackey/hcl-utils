@@ -1,7 +1,7 @@
 import _ from 'cleaner-node';
 import hasTags from "./has-tags.mjs";
 
-const hasUidTag = (node, tagName) => {
+const hasTag = (node, tagName) => {
   if (!hasTags(node)) {
     return false;
   }
@@ -15,4 +15,4 @@ const hasUidTag = (node, tagName) => {
   return lines.length === 1;
 }
 
-export default hasUidTag;
+export default hasTag;

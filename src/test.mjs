@@ -6,7 +6,7 @@ const main = async () => {
     filePath   : '/Users/flackey/Source/fredlackey/hcl-utils/samples/20240423160239/resources.tf',
     newFilePath: '/Users/flackey/Source/fredlackey/hcl-utils/src/test-output.tf',
     backupPath : '/Users/flackey/Source/fredlackey/hcl-utils/src/resources.tf.bak',
-    uidTag : null
+    uidTag     : null
   });
 
   if (success) {

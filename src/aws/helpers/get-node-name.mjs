@@ -37,11 +37,6 @@ const getNodeName = (stack, nodeOrNameParts) => {
   const itemName = qualifier ? `${name}(${qualifier})` : name;
   
   return [parentName, itemName].filter(x => _.isValidString(x)).join('.');
-
-
-
-
-
 }
 
 export default getNodeName;
