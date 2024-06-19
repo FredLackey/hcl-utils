@@ -1,8 +1,8 @@
+import _ from 'cleaner-node';
 import isTaggable from './is-taggable.mjs';
-import hasTags from './has-tags.mjs';
 
 const isMissingTags = node => {
-  return isTaggable(node) && !hasTags(node);
+  return isTaggable(node) && !_.isValidArray(node?.tags);
 }
 
 export default isMissingTags;

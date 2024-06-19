@@ -25,7 +25,6 @@ const addArnOutputsFunction = async ({ filePath, newFilePath, backupPath, uidTag
   }
   
   return true;
-  
 };
 
 export default addArnOutputsFunction;
