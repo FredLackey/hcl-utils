@@ -12,8 +12,20 @@
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/tests/load-hcl.js"
     },
-
-
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "TEST getNames",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/tests/get-names.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "TEST findNodes",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/tests/find-nodes.js"
+    },
 
     {
       "type": "node",
