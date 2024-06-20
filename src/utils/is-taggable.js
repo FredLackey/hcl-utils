@@ -4,9 +4,9 @@ const { TAGGABLE } = require('./constants')
 
 const isTaggable = node => {
 
-  return _.isValidArray(node?.name?.parts)
+  return node && _.isValidArray(node?.name?.parts)
     && node.name.parts.length === 3
-    && TAGGABLE.includes(node.name.parts[2]);
+    && TAGGABLE.includes(node.name.parts[1]);
 
 }
 

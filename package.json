@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cleaner-node": "^1.1.5",
+    "cleaner-node": "^1.1.7",
     "yargs": "^17.7.2"
   }
 }

@@ -8,6 +8,13 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "TEST setTag",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/tests/set-tag.js"
+    },    
+    {
+      "type": "node",
+      "request": "launch",
       "name": "TEST loadHcl",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/tests/load-hcl.js"

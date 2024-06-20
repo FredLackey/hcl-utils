@@ -1,10 +1,12 @@
 const _ = require('cleaner-node');
+const isGoogle = require('./is-google')
+const calculateHashes = require('./calculate-hashes');
 
 const IGNORED_HASHES = [
   'tags={}',
   'tags={},',
-  'labels=[]',
-  'labels=[],',
+  'labels={}',
+  'labels={},',
 ];
 
 const toName = line => {
@@ -47,13 +49,13 @@ const toName = line => {
 
 };
 
-const initAttributes = (node, source, target) => {
+const initAttributes = (node) => {
 
-  if (node[source].length < 3) {
+  if (node.tagLines.length < 3) {
     return;
   }
   
-  const lines = [...node[source]];
+  const lines = [...node.tagLines];
   lines.shift();
   lines.pop();
   
@@ -72,15 +74,17 @@ const initAttributes = (node, source, target) => {
     const value = _.unquote(parts[1]);
     
     if (_.isValidString(key) && _.isValidString(value)) {
-      node[target] = node[target] || {};
-      node[target][key] = value;
+      node.tags = node.tags || {};
+      node.tags[key] = value;
     }
   });
 
 };
-const initAttributesLines = (node, name, prefix) => {
+const initAttributesLines = (node) => {
 
-  node[name] = [];
+  const prefix = isGoogle(node) ? 'labels' : 'tags';
+
+  node.tagLines = [];
 
   let inLines   = false;
 
@@ -94,21 +98,20 @@ const initAttributesLines = (node, name, prefix) => {
     }
     if (!inLines && hash === `${prefix}={`) {
       inLines = true;
-      node[name].push(line);
+      node.tagLines.push(line);
       continue;
     };
     if (inLines && hash.endsWith('}')) {
       inLines = false;
-      node[name].push(line);
+      node.tagLines.push(line);
       return;
     }
     if (inLines) {
-      node[name].push(line); 
+      node.tagLines.push(line); 
     }
   }
 
 }
-
 
 const loadHcl = async (filePath) => {
 
@@ -172,11 +175,9 @@ const loadHcl = async (filePath) => {
 
   doc.nodes.forEach(node => {
 
-    initAttributesLines(node, 'tagLines', 'tags');
-    initAttributes(node, 'tagLines', 'tags');
-
-    initAttributesLines(node, 'labelLines', 'labels');
-    initAttributes(node, 'labelLines', 'labels');
+    initAttributesLines(node);
+    initAttributes(node);
+    calculateHashes(node);
 
   });
 
