@@ -1,6 +1,7 @@
-const _ = require('cleaner-node');
-const isGoogle = require('./is-google')
+const _               = require('cleaner-node');
+const isGoogle        = require('./is-google')
 const calculateHashes = require('./calculate-hashes');
+const initTagLines = require('./init-tag-lines');
 
 const IGNORED_HASHES = [
   'tags={}',
@@ -120,6 +121,8 @@ const loadHcl = async (filePath) => {
     nodes: [],
   };
 
+  doc.lines = _.removeComments(doc.lines);
+
   let node   = null;
   let level  = 0;
 
@@ -172,6 +175,8 @@ const loadHcl = async (filePath) => {
       continue;
     }
   };
+
+  initTagLines(doc);
 
   doc.nodes.forEach(node => {
 

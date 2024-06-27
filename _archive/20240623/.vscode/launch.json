@@ -8,6 +8,17 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "00 - Help",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
+        "--help"
+      ]
+    },    
+
+    {
+      "type": "node",
+      "request": "launch",
       "name": "TEST setTag",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/tests/set-tag.js"

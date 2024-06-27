@@ -1,5 +1,5 @@
-const _           = require('cleaner-node');
-const toNodeList  = require('./to-node-list');
+const _ = require('cleaner-node');
+const toNodeList = require('./to-node-list');
 const toNodeQuery = require('./to-node-query');
 
 const findNodes = (docOrNodeOrNodes, nodeQuery, tagQuery) => {
@@ -28,9 +28,9 @@ const findNodes = (docOrNodeOrNodes, nodeQuery, tagQuery) => {
   const { key, value } = toTagQuery(tagQuery);
 
   if (_.isValidString(key) && _.isValidString(value)) {
-    nodes = nodes.filter(x => x && getTagValue(x, key).trim() === value.trim());
+    node = nodes.filter(x => x && getTagValue(x, key).trim() === value.trim());
   } else if (_.isValidString(key)) {
-    nodes = nodes.filter(x => x && hasTag(key));
+    node = nodes.filter(x => x && hasTag(key));
   }
 
   return nodes;

@@ -1,0 +1,35 @@
+I need to create a NodeJS command to find nodes and alter tags in a Terraform HCL file.  Please validate all values before creating a javascript object with all of them and supplying it to a function called "proceed()"  The arguments used with Yargs are:
+
+action : Required.  Options are "set", "find", or "clear"
+
+overwrite : Optional boolean.  Default is false.  If set to true the source file will be modified.  Cannot be set to true when a backup folder has been supplied.
+
+path : Required.  Path is either to a folder, where .tf files are kept or an individual file.
+
+backup-folder : Optional.  Default is the folder supplied in "path".  Cannot be supplied if overwrite is true.  This is where copies of the source file are stored when not overwriting.
+
+node : Requied.  Fully qualified name of the node(s) being targetted (ie "hcl-type.node-type.name").  Each of the three segments is optional.  For any segment not supplied the default is "*"
+
+query : Optional.  Format is "key=value" where both key and value are optional.  Default for either is "*".  Supplying both key and value will cause the target nodes to be filtered by those who a specfic tag set to a specific value.  Supplying only the key will filter the target any nodes having a tag with that name regardless of the value.  Supplying on the value will target any nodes having a tag with that value regardless of the key.
+
+key : Required if action is "set" or "clear".  This is the name of the tag that will be either set or cleared. 
+
+value : Required if action is "set".  This is the value of the tag that will be set.
+
+quote : Optional boolean.  Default is true.  If set to false the value of the tag will not be surrounded in quotes.  This is used for Terraform references, such as setting the arn.
+
+dry-run : Optional boolean.  Default is false.  Allows the process to proceed without actually writing the changes.
+
+/**
+ * Parameters:
+ * - Action (set, find, clear)
+ * - Overwrite (true, false)
+ * - Path 
+ * - Backup Folder
+ * - Node Name (a.b.c)
+ * - Query (key=value)
+ * - Key
+ * - Value
+ * - Quote (true, false)
+ * - Dry Run
+ */

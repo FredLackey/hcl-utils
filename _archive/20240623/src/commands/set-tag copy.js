@@ -29,7 +29,7 @@ const validate = p => {
   }
   return null;
 }
-const setTag = ({ doc, query, key, value, quoted = true }) => {
+const setTag = ({ doc, query, key, value, quote = true }) => {
 
   const err = validate({ doc, query, key, value })
   if (err) { 
@@ -53,7 +53,7 @@ const setTag = ({ doc, query, key, value, quoted = true }) => {
     throw new Error('Some selected nodes missing tag lines.  Narrow the select criteria or initialize tag lines at the document level.');
   }
 
-  const tagValue = quoted ? `"${value}"` : value;
+  const tagValue = quote ? `"${value}"` : value;
 
   const needUpdating = nodes.filter(node => getTagValue(node, key) !== value);
 

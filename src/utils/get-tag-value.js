@@ -1,9 +1,9 @@
-const _            = require('cleaner-node'    );
-const getTags      = require('./get-tags'      );
+const _      = require('cleaner-node');
+const getTag = require('./get-tag');
 
-const getTagValue = (node, key) => {
-  const tags = getTags(node);
-  return tags[key];
+const getTagValue = (node, tag) => {  
+  const item = getTag(node, tag);
+  return item?.value;
 };
 
 module.exports = getTagValue;

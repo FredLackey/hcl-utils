@@ -1,37 +1,34 @@
-const _               = require('cleaner-node'              );
-const missingTagLines = require('./missing-tag-lines');
-const getIndent       = require('./get-indent'       );
-const isGoogle        = require('./is-google'        );
-const toNodeList      = require('./to-node-list'      );
-const calculateHashes = require('./calculate-hashes'  );
+const _                = require('cleaner-node');
+const getIndent        = require('./get-indent');
+const isGoogle         = require('./is-google' );
+const isTaggable       = require('./is-taggable');
+const replaceNodeLines = require('./replace-node-lines');
 
-const initTagLines = docOrNodeOrNodes => {
+const initTagLines = (doc, node) => {
 
-  const allNodes = toNodeList(docOrNodeOrNodes);
-  const targetNodes = allNodes.filter(missingTagLines);
-  if (!_.isValidArray(targetNodes)) {
+  if (!isTaggable(node)) {
+    throw new Error('Node is not taggable');
+  };
+
+  if (_.isValidArray(node.taglines)) {
     return;
   }
 
-  const sampleNode = allNodes.find(x => (x && x.lines.length > 2));
-  if (!sampleNode) {
-    return;
-  }
-
-  const name = isGoogle(docOrNodeOrNodes) ? 'labels' : 'tags';
+  const name   = isGoogle(node) ? 'labels' : 'tags';
   const indent = getIndent(sampleNode);
 
-  targetNodes.forEach(node => {
-    const taglines = [
-      `${indent}${name} = {`,
-      `}`
-    ];
-    const lastLine = node.lines.pop();
-    node.lines.push(...taglines);
-    node.lines.push(lastLine);
-    calculateHashes(node);
-  });
+  const taglines = [
+    `${indent}${name} = {`,
+    `${indent}}`
+  ];
 
+  const lastLine = node.lines.pop();
+  node.lines.push(...taglines);
+  node.lines.push(lastLine);
+  node.hash = _.hashLines(node.lines);
+
+  replaceNodeLines(doc, node);
+  
 }
 
 module.exports = initTagLines;
