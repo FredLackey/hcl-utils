@@ -12,9 +12,9 @@ const findNodePositions = (doc, firstLine) => {
 
   let level = 0;
   let end = start;
-  for (let i = start + 1; i < lines.length; i += 1) {
+  for (let i = start + 1; i < doc.lines.length; i += 1) {
     
-    const line = lines[i];
+    const line = doc.lines[i];
     if (isOneLiner(line)) {
       continue;
     }

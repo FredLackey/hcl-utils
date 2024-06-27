@@ -1,19 +1,29 @@
 {
-  "name": "hcl-utils",
-  "version": "0.0.0",
+  "name"       : "hcl-utils",
+  "version"    : "0.0.0",
   "description": "Helper utilities for working with HCL (Terraform) files.",
-  "main": "/src/index.mjs",
-  "bin": {
-    "hcl-tag": "/src/cli.js"
+  "main"       : "/src/index.js",
+  "scripts"    : {
+    "lint"    : "eslint .",
+    "lint:fix": "eslint --fix ."
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "keywords": [
+    "hcl",
+    "terraform",
+    "utilities"
+  ],
+  "author": {
+    "name" : "Fred Lackey",
+    "email": "fred.lackey@gmail.com",
+    "url"  : "http://fredlackey.com"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license"     : "Apache-2.0",
   "dependencies": {
-    "cleaner-node": "^1.1.7",
-    "yargs": "^17.7.2"
+    "cleaner-node": "^1.1.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.5.0",
+    "eslint"    : "^9.5.0",
+    "globals"   : "^15.6.0"
   }
 }

@@ -6,7 +6,7 @@ const validate = (folderPath) => {
     throw new Error('Folder path is required.');
   }
   return null;
-}
+};
 const loadHclFiles = async (folderPath) => {
 
   const err = validate(folderPath);
@@ -15,7 +15,7 @@ const loadHclFiles = async (folderPath) => {
   const docs = _.getFiles(folderPath)
     .filter(x => (x && x.endsWith('.tf')))
     .map(file => loadHclFile(file))
-    .filter(x => (x && x.path))
+    .filter(x => (x && x.path));
 
   return docs;
 };

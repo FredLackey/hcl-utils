@@ -1,6 +1,9 @@
 const _           = require('cleaner-node');
 const toNodeList  = require('./to-node-list');
 const toNodeQuery = require('./to-node-query');
+const toTagQuery  = require('./to-tag-query');
+const getTagValue = require('./get-tag-value');
+const hasTag      = require('./has-tag');
 
 const findNodes = (docOrNodeOrNodes, nodeQuery, tagQuery) => {
   

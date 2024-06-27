@@ -1,5 +1,3 @@
-const _ = require('cleaner-node');
-
 const toNodeList = docOrNodeOrNodes => {
 
   const nodeOrNodes = docOrNodeOrNodes.nodes
@@ -8,6 +6,6 @@ const toNodeList = docOrNodeOrNodes => {
 
   return [].concat(nodeOrNodes).filter(x => (x && x.lines));
 
-}
+};
 
 module.exports = toNodeList;

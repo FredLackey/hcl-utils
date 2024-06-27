@@ -1,4 +1,3 @@
-const _      = require('cleaner-node');
 const getTag = require('./get-tag');
 
 const getTagValue = (node, tag) => {  

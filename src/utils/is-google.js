@@ -22,6 +22,6 @@ const isGoogle = (docOrNodeOrNodes) => {
 
   const resources = findNodes(nodes, 'resource');
   return resources.some(x => _.count(x?.name?.parts) >= 2 && x.name.parts[1].startsWith(GCP_PREFIX));
-}
+};
 
 module.exports = isGoogle;

@@ -1,9 +1,8 @@
 const _                 = require('cleaner-node');
-const isGoogle          = require('./is-google');
 const getTagValue       = require('./get-tag-value');
 const replaceNodeLines  = require('./replace-node-lines');
 const initTagLines      = require('./init-tag-lines');
-const findNodePositions = require('./find-node-positions');
+const parseTagLine          = require('./parse-tag-line');
 
 const modifyTag = (doc, node, key, value, quoted) => {
 
@@ -18,12 +17,10 @@ const modifyTag = (doc, node, key, value, quoted) => {
     value = `"${value}"`;
   }
 
-  node.lines = node.lines.filter(line => {
-    return tag?.line !== line;
-  });
+  node.lines = node.lines.filter(x => (x && parseTagLine(x).key !== key));
 
   const lastLine = node.lines[node.lines.length - 1];
-  node.lines.push(`    ${key} = ${value}`)
+  node.lines.push(`    ${key} = ${value}`);
   node.lines.push(lastLine);
   node.hash = _.hashLines(node.lines);
 

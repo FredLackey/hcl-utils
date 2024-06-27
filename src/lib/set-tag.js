@@ -29,7 +29,7 @@ const validate = params => {
     return ['Folder is empty.', 4];
   }
   files = files.filter(file => file.endsWith('.tf'));
-  if (!_isValidArray(files)) {
+  if (!_.isValidArray(files)) {
     return ['No .tf files found.', 5];
   }
   //#endregion
@@ -87,7 +87,7 @@ const validate = params => {
 
   return null;
 
-}
+};
 const setTag = params => {
 
   let err = validate(params);
@@ -97,7 +97,7 @@ const setTag = params => {
 
   const docs = loadHclFiles(path);
 
-  for (d = 0; d < docs.length; d++) {
+  for (let d = 0; d < docs.length; d++) {
 
     let nodes = findNodes(docs[d], nodeQuery, tagQuery);
         nodes = nodes.filter(node => getTagValue(node, key) !== value);
@@ -108,40 +108,41 @@ const setTag = params => {
       continue;
     }
 
-    for (t = 0; t < nodes.length; t++) {
+    for (let t = 0; t < nodes.length; t++) {
 
       try {
-        modifyTag(nodes[t], key, value, quoted)
+        modifyTag(nodes[t], key, value, quoted);
       } catch (ex) {
         nodes[t].error = toError(['Error modifying tag.', 14, ex, nodes[t]]);
         continue;
-      }
-
-      if (save && nodes[t].hash.original !== nodes[t].hash.current) {
-
-        const backupFile = _.isFolder(backupPath) 
-          ? _path.join(backupPath, _.getFileName(path)) 
-          : _.isValidString(backupPath)
-            ? backupPath
-            : null;
-
-        if (backupFile && !_.copyFile(path, backupFile)) {
-          nodes[t].error = toError(['Error backing up file.', 18, { source: path, target: backupFile } ]);
-          continue;
-        }
-
-        node.backup = backupFile;
-
-        if (!_.writeLines(path, doc.lines)) {
-          nodes[t].error = toError(['Error writing file.', 19, path]);
-        }
-          
       }
 
 
 
     };
       
+
+    if (save && docs[d].hash.original !== docs[d].hash.current) {
+
+      const backupFile = _.isFolder(backupPath) 
+        ? _path.join(backupPath, _.getFileName(docs[d].path)) 
+        : _.isValidString(backupPath)
+          ? backupPath
+          : null;
+
+      if (backupFile && !_.copyFile(path, backupFile)) {
+        docs[d].error = toError(['Error backing up file.', 18, { source: path, target: backupFile } ]);
+        continue;
+      }
+
+      docs[d].backup = backupFile;
+
+      docs[d].saved = _.writeLines(path, docs[d].lines);
+      if (!docs[d].saved) {
+        docs[d].error = toError(['Error writing file.', 19, path]);
+      }
+        
+    }
   };
 
   return err ? toError(err) : null;

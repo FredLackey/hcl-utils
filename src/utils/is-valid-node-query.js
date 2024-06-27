@@ -12,6 +12,6 @@ const isValidNodeQuery = value => {
     return false;
   }
   return clean.split('.').length < 3;
-}
+};
 
 module.exports = isValidNodeQuery;

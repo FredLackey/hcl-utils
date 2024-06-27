@@ -26,7 +26,7 @@ const getTag = (node, tag) => {
 
   });
 
-  const value = values.find(x => (x?.key === tag))
+  const value = values.find(x => (x?.key === tag));
 
   return value;
 

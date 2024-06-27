@@ -1,4 +1,3 @@
-const _ = require('cleaner-node');
 const isValidNodeQuery = require('./is-valid-node-query');
 
 // Node Query is required.

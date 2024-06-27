@@ -1,5 +1,12 @@
 const _ = require('cleaner-node');
 
+const IGNORED_HASHES = [
+  'tags={}',
+  'tags={},',
+  'labels={}',
+  'labels={},',
+];
+
 const toName = line => {
 
   let value = '';
@@ -42,13 +49,13 @@ const toName = line => {
 
 const validate = (filePath) => {
   if (!_.isValidString(filePath)) {
-    return 'File path is required.'
+    return 'File path is required.';
   }
   if (!filePath.endsWith('.tf')) {
-    return 'File must be a .tf file.'
+    return 'File must be a .tf file.';
   }
   return null;
-}
+};
 const loadHcl = async (filePath) => {
 
   const err = validate(filePath);
@@ -119,7 +126,7 @@ const loadHcl = async (filePath) => {
     if (hash.endsWith('}')) {
       level -= 1;
       if (level < 0) {
-        throw new Error('Invalid level detected.')
+        throw new Error('Invalid level detected.');
       }
       continue;
     }

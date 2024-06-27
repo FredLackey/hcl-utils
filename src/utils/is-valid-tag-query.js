@@ -5,7 +5,7 @@ const isValidTagQuery = value => {
   if (!_.isValidString(value)) {
     return true;
   }
-  const parts = value.split('=')
+  const parts = value.split('=');
   if (parts.length > 2) {
     return false;
   }

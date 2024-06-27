@@ -15,7 +15,7 @@ const initTagLines = (doc, node) => {
   }
 
   const name   = isGoogle(node) ? 'labels' : 'tags';
-  const indent = getIndent(sampleNode);
+  const indent = getIndent(node);
 
   const taglines = [
     `${indent}${name} = {`,
@@ -29,6 +29,6 @@ const initTagLines = (doc, node) => {
 
   replaceNodeLines(doc, node);
   
-}
+};
 
 module.exports = initTagLines;
