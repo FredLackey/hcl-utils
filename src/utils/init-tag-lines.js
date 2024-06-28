@@ -1,6 +1,6 @@
 const _                = require('cleaner-node');
 const getIndent        = require('./get-indent');
-const isGoogle         = require('./is-google' );
+const isGoogle         = require('./is-google');
 const isTaggable       = require('./is-taggable');
 const replaceNodeLines = require('./replace-node-lines');
 
@@ -8,7 +8,7 @@ const initTagLines = (doc, node) => {
 
   if (!isTaggable(node)) {
     throw new Error('Node is not taggable');
-  };
+  }
 
   if (_.isValidArray(node.taglines)) {
     return;

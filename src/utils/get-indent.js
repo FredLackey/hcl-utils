@@ -10,7 +10,7 @@ const getIndent = node => {
     if (prefix.length > 0) {
       break;
     }
-  };
+  }
   return prefix;
 };
 

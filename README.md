@@ -12,7 +12,33 @@ npm install hcl-utils
 
 As you can see from the `v0.0.0` version number, development has just begun.  At the moment there is only one function available however this will grow over time.
 
-### Set Tag (`setTag`)
+Each function is available as either a command line utility or as a module.
+
+### Set Tag (`setTag` & `set-hcl-tag`)
+
+#### Command Line Usage (`set-hcl-tag`)
+
+##### Parameters (`set-hcl-tag`)
+
+| Name        | Description                          | Type            | Default |
+|-------------|--------------------------------------|-----------------|---------|
+| `path`      | Path to HCL file or Terraform folder | `string (path)` |         |
+| `recursive` | Search child folders                 | `boolean`       |         |
+| `node`      | Fully-qualified node name            |                 | `*.*.*` |
+| `tag`       | Tag query as `key` or `key=value`    |                 | `*`     |
+| `key`       | Name of tag or label to set          |                 |         |
+| `value`     | Value of tag or label to set         |                 |         |
+| `quote`     | Wrap the value in quotes             | `boolean`       | `true`  |
+| `backup`    | Backup file path or folder path      | `boolean`       |         |
+| `save`      | Save changes back to file            | `boolean`       | `false` |
+| `quiet`     | Disable display of results           | `boolean`       | `false` |
+
+
+```bash
+
+
+
+
 
 ```javascript
 const { setTag } = require('hcl-utils');

@@ -1,0 +1,68 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 00 - Set Tag - Markdown",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/cli/set-tag/command.js",
+      "args": ["--cli-markdown"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 01 - Empty",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": []
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 02 - Source Dir",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": ["--source", "/Volumes/Photos/Import/"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 03 - Count",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": ["--source", "/Volumes/Photos/Import/", "--count"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 04 - Single Folder",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
+        "--source",
+        "/Volumes/Photos/Import/",
+        "--count",
+        "--recursive",
+        "false"
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "CLI 05 - No Blanks",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/src/command.js",
+      "args": [
+        "--source",
+        "/Volumes/Photos/Import/",
+        "--count",
+        "--allow-blank",
+        "false"
+      ]
+    }
+  ]
+}

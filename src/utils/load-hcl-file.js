@@ -65,11 +65,12 @@ const loadHcl = async (filePath) => {
   const hash = _.hashLines(lines);
   const doc  = {
     path  : filePath,
-    backup: null, // Backup file path
+    backup: null,       // Backup file/folder path
     saved : false,
     lines,
-    nodes: [],
-    hash : {
+    nodes   : [],
+    selected: [],
+    hash    : {
       original: hash,
       current : hash
     }
@@ -98,7 +99,7 @@ const loadHcl = async (filePath) => {
       const name = toName(line);
       node = {
         name,
-        type : _.isValidArray(name?.parts) ? name.parts[0]: null,
+        type : _.isValidArray(name?.parts) ? name.parts[0] : null,
         lines: [rawLine]
       };
       doc.nodes.push(node);
@@ -130,7 +131,7 @@ const loadHcl = async (filePath) => {
       }
       continue;
     }
-  };
+  }
   
   // Ensure the document hash is up to date
   doc.hash.current = _.hashLines(doc.lines);

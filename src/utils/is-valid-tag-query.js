@@ -10,7 +10,7 @@ const isValidTagQuery = value => {
     return false;
   }
 
-  let cleaned = parts.map(x => _.unquote(x.trim())).filter(x => (_.isValidString(x)));
+  const cleaned = parts.map(x => _.unquote(x.trim())).filter(x => (_.isValidString(x)));
 
   return cleaned.length === parts.length;
 

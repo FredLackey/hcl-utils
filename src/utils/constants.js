@@ -1,3 +1,6 @@
+const _ = require('cleaner-node');
+
+const AZURE_CHARACTERS = _.ALPHANUMERIC + '.-_';
 const AZURE_TAGGABLE = [
   "azurerm_api_management",
   "azurerm_app_service",
@@ -45,6 +48,7 @@ const AZURE_TAGGABLE = [
   "azurerm_virtual_wan"
 ];
 
+const AWS_CHARACTERS = _.ALPHANUMERIC + '.-_';
 const AWS_TAGGABLE = [
   "aws_acm_certificate",
   "aws_ami",

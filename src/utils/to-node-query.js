@@ -7,10 +7,10 @@ const toNodeQuery = value => {
   }
   const parts = value.split('.');
   if (parts.length === 1) {
-    return value + '.*.*';
+    return `${value}.*.*`;
   }
   if (parts.length === 2) {
-    return value + '.*';
+    return `${value}.*`;
   }
   return value;
 };
