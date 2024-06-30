@@ -1,4 +1,5 @@
-const _            = require('cleaner-node');
+const _ = require('cleaner-node');
+
 const { TAGGABLE } = require('./constants');
 
 const isTaggable = node => {

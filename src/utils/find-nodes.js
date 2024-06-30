@@ -5,36 +5,25 @@ const toTagQuery  = require('./to-tag-query');
 const getTagValue = require('./get-tag-value');
 const hasTag      = require('./has-tag');
 
-const findNodes = (docOrNodeOrNodes, nodeQuery, tagQuery) => {
+const findNodes = (docOrNodes, nodeQuery, tagQuery) => {
   
-  let nodes = toNodeList(docOrNodeOrNodes);
+  let nodes = toNodeList(docOrNodes);
+      nodes = nodes.filter(x => _.isValidArray(x?.name?.parts));
 
   if (!_.isValidArray(nodes, true)) {
-    throw new Error('Doc or nodes required');
+    throw new Error('Invalid value supplied to findNodes');
   }
 
-  const queryParts = toNodeQuery(nodeQuery).split('.');
+  let query = toNodeQuery(nodeQuery);
 
-  // Filter on node query first
-  for (let i = 0; i < queryParts.length; i += 1) {
+  nodes = nodes.filter(x => (query.tType === '*') || query.tType === x.tType);
+  nodes = nodes.filter(x => (query.pType === '*') || query.pType === x.pType);
+  nodes = nodes.filter(x => (query.pName === '*') || query.pName === x.pName);
 
-    const queryPart = queryParts[i];
+  query = toTagQuery(tagQuery);
 
-    if (queryPart === '*') {
-      continue;
-    }
-
-    nodes = nodes.filter(x => x && x.name.parts[i] === queryPart);
-
-  }
-
-  const { key, value } = toTagQuery(tagQuery);
-
-  if (_.isValidString(key) && _.isValidString(value)) {
-    nodes = nodes.filter(x => x && getTagValue(x, key).trim() === value.trim());
-  } else if (_.isValidString(key)) {
-    nodes = nodes.filter(x => x && hasTag(key));
-  }
+  nodes = nodes.filter(x => (query.key === '*') || hasTag(x, query.key));
+  nodes = nodes.filter(x => (query.value === '*') || getTagValue(x, query.key).trim() === query.value.trim());
 
   return nodes;
 

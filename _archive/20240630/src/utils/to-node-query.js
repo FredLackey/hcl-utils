@@ -5,17 +5,14 @@ const toNodeQuery = value => {
   if (!isValidNodeQuery(value)) {
     return null;
   }
-
   const parts = value.split('.');
-  
-  return {
-    tType: parts[0],
-    pType: parts.length >= 1 ? parts[1]: '*',
-    pName: parts.length >= 2 ? parts[2]: '*',
+  if (parts.length === 1) {
+    return `${value}.*.*`;
   }
+  if (parts.length === 2) {
+    return `${value}.*`;
+  }
+  return value;
 };
 
 module.exports = toNodeQuery;
-
-
-

@@ -6,15 +6,23 @@ const backupFile = (sourcePath, filePath, backupPath, date) => {
   if (!_.isValidString(backupPath)) {
     return; // Nothing to do.
   }
-  if (_.isFolder(sourcePath) && !_.isFolder(backupPath)) {
-    throw new Error('Backup path must be a folder.');
+
+  const sourceIsFolder = _.isFolder(sourcePath);
+  const targetIsFolder = _.isFolder(backupPath);
+  const targetIsFile   = _.isFile(backupPath);
+
+  if (sourceIsFolder && !targetIsFolder) {
+    throw new Error('Backup path must be a folder when the source is a folder.');
   }
 
-  if (_.isFolder(backupPath)) {
+  const timestamp = targetIsFolder
+    ? _.getBlockDate(date).substring(0, 12)
+    : _.getBlockDate(date).substring(0, 14);
 
-    const folderName   = _.getBlockDate(date).substring(0, 12);
+  if (targetIsFolder) {
+
     const relativePath = filePath.substring(sourcePath.length);
-    const targetFolder = path.join(backupPath, folderName);
+    const targetFolder = path.join(backupPath, timestamp);
     const targetPath   = path.join(targetFolder, relativePath);
 
     if (!_.makePath(targetFolder)) {
@@ -26,10 +34,9 @@ const backupFile = (sourcePath, filePath, backupPath, date) => {
 
     _.createFolder(backupPath);
 
-  } else if (_.isFile(backupPath)) {
+  } else if (targetIsFile) {
 
-    const suffix     = _.getBlockDate(date).substring(0, 14);
-    const targetPath = backupPath + '-' + suffix;
+    const targetPath = backupPath + '-' + timestamp;
 
     if (!_.copyFile(filePath, targetPath)) {
       throw new Error('Could not backup file.');
